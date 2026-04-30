@@ -1,0 +1,99 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: lightgray;
+    background-color: #253746;
+    text-align: center;
+}
+
+h1 {
+    color: white;
+}
+
+h4 {
+    font-weight: normal;
+}
+
+textarea {
+    height: 1.3em;
+    resize: none;
+}
+
+td {
+    padding: 10px;
+}
+
+img {
+    padding: 25px;
+    min-width: 150px;
+}
+
+input, textarea, select, button, select, ::picker(select) {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    border: 1px solid gray;
+    background-color: #2b343b;
+    border-radius: 0px;
+    color: white;
+    appearance: base-select;
+}
+
+input::placeholder, textarea::placeholder, legend {
+    color: lightgray;
+}
+
+a, .completed, option::checkmark {
+    color: #ec7f22;
+}
+
+select::picker-icon {
+  color: #ec7f22;
+  font-size: 1em;
+  transition: 0.5s rotate;
+}
+
+select:open::picker-icon {
+  rotate: 180deg;
+}
+
+option::checkmark { 
+    font-weight: bold;   
+}
+
+::picker(select) {
+  opacity: 0;
+  transition: all 0.2s allow-discrete;
+}
+
+:open::picker(select) {
+  opacity: 1;
+}
+
+@starting-style {
+  :open::picker(select) {
+    opacity: 0;
+  }
+}
+
+#login, #checklist, #checklistuser {
+    border-radius: 3px;
+    display: inline-block;
+}
+
+#checklisttable, #usertable {
+    justify-self: center;
+}
+
+#login, #checklist, #checklistuser, #checklisttable, #usertable {
+    border: 2px solid rgb(100, 100, 100);
+    background-color: #2f3b44;
+    padding: 8px 16px;
+}
+
+#Checklist {
+    font-size: 12px;
+    accent-color: #ec7f22;
+}
+
+#deviceselect {
+    font-size: 20px;
+    margin-bottom: 20px;
+}
