@@ -28,6 +28,8 @@ $result = mysqli_query($conn, $query);
     <form id="checklistuser" action="" method="post">
         <label for="user">Username:</label>
         <input type="text" id="user" name="user" placeholder="Enter username"><br><br>
+        <label for="email">Email address:</label>
+        <input type="text" id="email" name="email" placeholder="Enter email"><br><br>
         <label for="pass">Password:</label>
         <input type="password" id="pass" name="pass" placeholder="Enter password"><br><br>
         <label for="perms">Permissions type:</label>
@@ -58,6 +60,8 @@ $result = mysqli_query($conn, $query);
                         <td id='UserInfo'>
                             <p id='Username'>Username: ".$row['Username']."</p>
                             <p id='UsernameEditP' hidden>Username: <input type=text id='UsernameEdit' value=".$row['Username']."></p>
+                            <p id='Email'>Email address: ".$row['Email']."</p>
+                            <p id='EmailEditP' hidden>Email: <input type=text id='EmailEdit' value=".$row['Email']."></p>
                             <p id='Permissions'>Permissions level: ".$row['Permissions']."</p>
                             <p id='PermissionsEditP' hidden>Permissions level: <select id='PermsEdit'>
                                 <option value='user'>User</option>

@@ -73,6 +73,10 @@ option::checkmark {
   }
 }
 
+#forgotpass {
+    color:#ec7f22;
+}
+
 #login, #checklist, #checklistuser {
     border-radius: 3px;
     display: inline-block;

@@ -27,6 +27,14 @@ if (isset($_SESSION['user']) && isset($_SESSION['perms'])){
         <input type="password" id="pass" name="pass" placeholder="Enter a password here" required><br><br>
         <input type="submit">
     </form>
-    <p id="result">
+    <p id="result"><br>
+    <button id="forgotpass">Forgot password?</button>
+    <div id="forgotpassdiv" hidden>
+        <legend>If you have an account, please enter your email below and your password will be sent to you:</legend><br>
+        <form id="forgotpassform" action="" method="post">
+            <input type="text" id="email" name="email" placeholder="Enter your email here" required>
+            <input type="submit">
+        </form>
+    </div>
 </body>
 </html>
