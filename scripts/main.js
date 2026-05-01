@@ -113,7 +113,7 @@ $(document).ready(function(){
         window.location.replace(url)
     })
 
-    $("#deviceselect").on("input",function(){
+    $(document).on("input", "#deviceselect", function(){
         // Sets the input to lowercase to make it ignore capitals, making iit easier to search (name of pc is also set to lowercase later for this reason)
         let search = $(document).find('#deviceselect').val().toLowerCase()
         if (search.length >= 3) {
