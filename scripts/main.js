@@ -114,7 +114,7 @@ $(document).ready(function(){
     })
 
     $(document).on("input", "#deviceselect", function(){
-        // Sets the input to lowercase to make it ignore capitals, making iit easier to search (name of pc is also set to lowercase later for this reason)
+        // Sets the input to lowercase to make it ignore capitals, making it easier to search (name of pc is also set to lowercase later for this reason)
         let search = $(document).find('#deviceselect').val().toLowerCase()
         if (search.length >= 3) {
             // Gets the rows inside the table body and saves it as an array (so they can be iterated through)
