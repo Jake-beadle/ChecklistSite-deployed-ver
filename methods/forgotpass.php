@@ -38,7 +38,7 @@ else {
 
     //Recipients
     $mail->setFrom('passreset@bsl.co.uk', 'Checklist Site');
-    $mail->addAddress($email, 'Joe User');     //Add a recipient
+    $mail->addAddress($email, $username);     //Add a recipient
 
     //Subject
     $mail->Subject = 'BSL Account Recovery';
