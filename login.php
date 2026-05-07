@@ -1,8 +1,14 @@
 <?php
 session_start();
+// If session data has already been set, redirects to /main.php
 if (isset($_SESSION['user']) && isset($_SESSION['perms'])){
-    header("Location: /main.php");  // If session data has already been set, redirects to /main.php
+    header("Location: /main.php");
 } 
+// If an error occurred when trying to reset a password, it redirects the user here. This variable tells them why
+if (isset($_SESSION['reseterr'])) {
+    echo $_SESSION['reseterr'];
+    $_SESSION['reseterr'] = '';
+}
 ?>
 
 <!DOCTYPE html>
