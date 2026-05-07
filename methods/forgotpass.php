@@ -32,10 +32,11 @@ else {
     
     try {
     //Server settings
-    $mail->isSMTP();                                            //Send using SMTP
-    $mail->Host       = 'smtp.bsl.co.uk';                      //Set the SMTP server to send through
-    $mail->Port       = 25;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
-    $mail->SMTPOptions = array(
+    $mail->isSMTP();                                            
+    $mail->Host       = 'smtp.bsl.co.uk';                      
+    $mail->Port       = 25;                                    
+    //These settings prevent emails from being blocked due to missing certificates
+    $mail->SMTPOptions = array(                                
     'ssl' => array(
         'verify_peer' => false,
         'verify_peer_name' => false,
@@ -45,7 +46,7 @@ else {
 
     //Recipients
     $mail->setFrom('passreset@bsl.co.uk', 'Checklist Site');
-    $mail->addAddress($email, $username);     //Add a recipient
+    $mail->addAddress($email, $username);
 
     //Subject
     $mail->Subject = 'BSL Account Recovery';
