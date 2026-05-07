@@ -33,8 +33,15 @@ else {
     try {
     //Server settings
     $mail->isSMTP();                                            //Send using SMTP
-    $mail->Host       = 'smtp.bsl.co.uk';                     //Set the SMTP server to send through
+    $mail->Host       = 'smtp.bsl.co.uk';                      //Set the SMTP server to send through
     $mail->Port       = 25;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+    $mail->SMTPOptions = array(
+    'ssl' => array(
+        'verify_peer' => false,
+        'verify_peer_name' => false,
+        'allow_self_signed' => true
+        )
+    );
 
     //Recipients
     $mail->setFrom('passreset@bsl.co.uk', 'Checklist Site');
