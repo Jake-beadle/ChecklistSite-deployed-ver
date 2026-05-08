@@ -33,18 +33,24 @@ if(!($userHas7characters && $userNotAbove20characters && $userIsAlphanumeric)) {
 } else if (!($emailIsValid)) {
     echo "Invalid email entered (incorrect format)";
 } else {
-    // Makes sure that the entered username hasn't already been added to the database (includes deleted users)
-    $dupeQueryToUse = "SELECT Username FROM logininfo WHERE Username = '$user'";
-    $dupeQuery = mysqli_query($conn,$dupeQueryToUse); 
-    $dupeTest = mysqli_num_rows($dupeQuery);
-    if ($dupeTest > 0) { 
+    // Makes sure that the entered username and email haven't already been added to the database (includes deleted users)
+    $userDupe = "SELECT Username FROM logininfo WHERE Username = '$user'";
+    $emailDupe = "SELECT Email FROM logininfo WHERE Email = '$email'";
+    $userQuery = mysqli_query($conn,$userDupe); 
+    $emailQuery = mysqli_query($conn,$emailDupe); 
+    $userTest = mysqli_num_rows($userQuery);
+    $emailTest = mysqli_num_rows($emailQuery);
+    if ($userTest > 0) { 
     echo "Error: username entered has already been used, try another";
-    }   
+    }  
+    else if ($emailTest > 0) { 
+    echo "Error: email entered has already been used, try another";
+    }  
     else {
     // Hashes the entered password (to make it more secure)
     $hashPass = password_hash($pass, PASSWORD_DEFAULT); 
     // Adds the account info into the database, returning an error if something doesn't work as expected
-    $insertQuery = "INSERT INTO logininfo (Username, Email, Password, HashedPassword, Permissions) VALUES('$user', '$email', '$pass', '$hashPass', '$perms')";
+    $insertQuery = "INSERT INTO logininfo (Username, Email, HashedPassword, Permissions) VALUES('$user', '$email', '$hashPass', '$perms')";
     if(!$result = mysqli_query($conn, $insertQuery)){
         echo "Error: ".mysqli_error($conn);
     }
