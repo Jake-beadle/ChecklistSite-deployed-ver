@@ -18,7 +18,7 @@ if (strlen($urltoken) != 64) {
     $tokentest = mysqli_num_rows($tokenresult);
     // It then checks that the token is in the database that stores the tokens
     if ($tokentest == 0) {
-        $_SESSION['reseterr'] = 'alert("Token was invalid (already used/not found), redirected to login page.")';
+        $_SESSION['reseterr'] = 'Token was invalid (already used/not found), redirected to login page.';
         header("Location: /login.php");
     } else {
         $values = mysqli_fetch_assoc($tokenresult);
@@ -28,7 +28,7 @@ if (strlen($urltoken) != 64) {
         $currtime = time();
         // Finally, it checks its expiry time to check if the token has expired or not, making it unusable if it is
         if (($currtime > $expiry) or $values["Unusable"] == 1) {
-            $_SESSION['reseterr'] = 'alert("Token was invalid (expired), redirected to login page.")';
+            $_SESSION['reseterr'] = 'Token was invalid (expired), redirected to login page.';
             $removeQuery = "UPDATE resettokens SET Unusable = 1 WHERE Token = '$urltoken'";
             $remove = mysqli_query($conn, $removeQuery);
             header("Location: /login.php");
