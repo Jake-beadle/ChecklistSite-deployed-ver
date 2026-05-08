@@ -120,7 +120,7 @@ $(document).ready(function(){
             sort = $(document).find('#datesort').val()
             size = $(document).find('#pagesize').val()
             page = parseInt(page) - 1
-            let url = new URL('http://localhost:81/main.php')
+            let url = new URL('http://bsvscu-utilp01.bsl.co.uk:9000/main.php')
             url.searchParams.set('sort',sort)
             url.searchParams.set('page',page)
             url.searchParams.set('pagesize',size)
@@ -135,7 +135,7 @@ $(document).ready(function(){
             sort = $(document).find('#datesort').val()
             size = $(document).find('#pagesize').val()
             page = parseInt(page) + 1
-            let url = new URL('http://localhost:81/main.php')
+            let url = new URL('http://bsvscu-utilp01.bsl.co.uk:9000/main.php')
             url.searchParams.set('sort',sort)
             url.searchParams.set('page',page)
             url.searchParams.set('pagesize',size)
