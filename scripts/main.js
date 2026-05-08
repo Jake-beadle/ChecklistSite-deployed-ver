@@ -10,7 +10,7 @@ $(document).ready(function(){
         let selectsize = $(document).find(`#pagesize option[value=${currentsize}]`)
         // If the parameters can't be set for any reason (e.g. if the URL is changed manually), it gets set back to the default settings
         if (!($(selectsort).length)||!($(selectpage).length)||!($(selectsize).length)) {
-            window.location.replace("http://bsvscu-utilp01.bsl.co.uk:9000/main.php?sort=disabled&page=1&pagesize=5")
+            window.location.replace("http://localhost:81/main.php?sort=disabled&page=1&pagesize=5")
         }
         $(selectsort).prop('selected',true)
         $(selectpage).prop('selected',true)
@@ -34,11 +34,13 @@ $(document).ready(function(){
     $(document).on("click", "#editEntry", function(){
         let rowToEdit = $(this).closest("tr");
         $(rowToEdit).find("#PCname").attr("hidden", true)
+        $(rowToEdit).find("#Status").attr("hidden", true)
         $(rowToEdit).find("#PlantSub").attr("hidden", true)
         $(rowToEdit).find("#editEntry").attr("hidden", true)
         $(rowToEdit).find("#deleteEntry").attr("hidden", true)
         $(rowToEdit).find(".Default").attr("hidden", true)
         $(rowToEdit).find("#PCnameEditP").attr("hidden", false)
+        $(rowToEdit).find("#StatusEditP").attr("hidden", false)
         $(rowToEdit).find("#PlantSubEditP").attr("hidden", false)
         $(rowToEdit).find("#finishEditEntry").attr("hidden", false)
         $(rowToEdit).find("#cancelEditEntry").attr("hidden", false)
@@ -49,11 +51,13 @@ $(document).ready(function(){
     $(document).on("click", "#cancelEditEntry", function(){
         let rowToEdit = $(this).closest("tr");
         $(rowToEdit).find("#PCname").attr("hidden", false)
+        $(rowToEdit).find("#Status").attr("hidden", false)
         $(rowToEdit).find("#PlantSub").attr("hidden", false)
         $(rowToEdit).find("#editEntry").attr("hidden", false)
         $(rowToEdit).find("#deleteEntry").attr("hidden", false)
         $(rowToEdit).find(".Default").attr("hidden", false)
         $(rowToEdit).find("#PCnameEditP").attr("hidden", true)
+        $(rowToEdit).find("#StatusEditP").attr("hidden", true)
         $(rowToEdit).find("#PlantSubEditP").attr("hidden", true)
         $(rowToEdit).find("#finishEditEntry").attr("hidden", true)
         $(rowToEdit).find("#cancelEditEntry").attr("hidden", true)
@@ -67,6 +71,7 @@ $(document).ready(function(){
         let rowToEdit = $(this).closest("tr");
         let idOfRow = $(rowToEdit).find('#ComputerID').html()
         let newName = $(rowToEdit).find('#PCnameEdit').val()
+        let newStatus = $(rowToEdit).find('#StatusEdit option:selected').text()
         let newPlant = $(rowToEdit).find('#PlantEdit option:selected').text()
         let newSub = $(rowToEdit).find('#SublocationEdit').val()
         let checks = $(rowToEdit).find(".Edit input")
@@ -82,7 +87,7 @@ $(document).ready(function(){
             }
         }
         if (confirm("Are you sure you want to edit this entry? (page will refresh afterwards)") == true) {
-            $.post("../methods/checklistupdate.php", {"idToUpdate": idOfRow, "newName": newName, "newPlant": newPlant, "newSub": newSub, "checklistArray": checkArray}, function(response) {
+            $.post("../methods/checklistupdate.php", {"idToUpdate": idOfRow, "newName": newName, "newStatus": newStatus, "newPlant": newPlant, "newSub": newSub, "checklistArray": checkArray}, function(response) {
                 $("#result").html(response)
                 setTimeout(function() { location.reload(true); }, 2000);
             })
@@ -106,7 +111,7 @@ $(document).ready(function(){
         sort = $(document).find('#datesort').val()
         page = $(document).find('#pagechange').val()
         size = $(document).find('#pagesize').val()
-        let url = new URL('http://bsvscu-utilp01.bsl.co.uk:9000/main.php')
+        let url = new URL('http://localhost:81/main.php')
         url.searchParams.set('sort',sort)
         url.searchParams.set('page',page)
         url.searchParams.set('pagesize',size)
@@ -120,7 +125,7 @@ $(document).ready(function(){
             sort = $(document).find('#datesort').val()
             size = $(document).find('#pagesize').val()
             page = parseInt(page) - 1
-            let url = new URL('http://bsvscu-utilp01.bsl.co.uk:9000/main.php')
+            let url = new URL('http://localhost:81/main.php')
             url.searchParams.set('sort',sort)
             url.searchParams.set('page',page)
             url.searchParams.set('pagesize',size)
@@ -135,7 +140,7 @@ $(document).ready(function(){
             sort = $(document).find('#datesort').val()
             size = $(document).find('#pagesize').val()
             page = parseInt(page) + 1
-            let url = new URL('http://bsvscu-utilp01.bsl.co.uk:9000/main.php')
+            let url = new URL('http://localhost:81/main.php')
             url.searchParams.set('sort',sort)
             url.searchParams.set('page',page)
             url.searchParams.set('pagesize',size)
@@ -143,8 +148,8 @@ $(document).ready(function(){
         }
     })
 
-    $(document).on("input", "#deviceselect", function(){
-        // Sets the input to lowercase to make it ignore capitals, making it easier to search (name of pc is also set to lowercase later for this reason)
+    $("#deviceselect").on("input",function(){
+        // Sets the input to lowercase to make it ignore capitals, making iit easier to search (name of pc is also set to lowercase later for this reason)
         let search = $(document).find('#deviceselect').val().toLowerCase()
         if (search.length >= 3) {
             // Gets the rows inside the table body and saves it as an array (so they can be iterated through)

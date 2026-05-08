@@ -162,6 +162,14 @@ $checkresult = mysqli_query($conn, $checkquery);
                         <td id='PCUserInfo'>
                             <p id='PCname'>Name of PC: ".$inforow['PCname']."</p>
                             <p id='PCnameEditP' hidden>Name of PC: <input type=text id='PCnameEdit' value=".$inforow['PCname']."></p>
+                            <p id='Status'>Status: ".$inforow['Status']."</p>
+                            <p id='StatusEditP' hidden>Plant: 
+                            <select id='StatusEdit' name='StatusEdit'>
+                                <option value='received'>Received</option>
+                                <option value='inprogress'>In progress</option>
+                                <option value='passed'>Passed</option>
+                                <option value='failed'>Failed</option>
+                            </select></p>
                             <p id='PlantSub'>Plant: ".$inforow['Plant'].", sub-location: ".$inforow['Sublocation']."</p>
                             <p id='PlantSubEditP' hidden>Plant: 
                             <select id='PlantEdit' name='PlantEdit'>
