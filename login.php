@@ -19,7 +19,7 @@ if (isset($_SESSION['reseterr'])) {
     <link rel="stylesheet" href="./style.css">
     <script src="./scripts/jquery-3.7.1.min.js"></script>
     <script src="./scripts/login.js"></script>
-    <title>Login page</title>
+    <title>Login Page</title>
 </head>
 <body>
     <img src="https://internal.britishsteel.uk.com/img/logo.svg"><br> 
