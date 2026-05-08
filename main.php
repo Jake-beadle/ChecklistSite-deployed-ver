@@ -94,16 +94,6 @@ $checkresult = mysqli_query($conn, $checkquery);
         <option value="disabled">Disabled</option>
         <option value="newest">Newest</option>
         <option value="oldest">Oldest</option>
-    </select><br><br> 
-    <!-- Changes the page that the user is on to show different entries from the table -->
-    <label for="pagechange">Currently on page</label>
-    <select class="urlchange" id="pagechange" name="pagechange">
-        <?php 
-            $pagecount = ceil($amount/$pagesize);
-            for ($page = 1; $page <= $pagecount; $page++) {
-                echo '<option value='.$page.'>'.$page.'</option>';
-            }
-        ?>   
     </select>
     <!-- Can be used to limit the amount of entries that can be shown at once to prevent lag for the user (which could happen if there were large amounts of entries shown at once) -->
     <label for="pagesize">, entries per page: </label>
@@ -113,7 +103,23 @@ $checkresult = mysqli_query($conn, $checkquery);
         <option value="25">25</option>
         <option value="50">50</option>
         <option value="100">100</option>
-    </select><br><br> 
+    </select><br><br>
+    <!-- Changes the page that the user is on to show different entries from the table -->
+    <button id="prevpage">Previous page</button>
+    <label for="pagechange">Currently on page</label>
+    <select class="urlchange" id="pagechange" name="pagechange">
+        <?php 
+            $pagecount = ceil($amount/$pagesize);
+            for ($page = 1; $page <= $pagecount; $page++) {
+                if ($page == $pagecount) {
+                    echo '<option class="lastpage" value='.$page.'>'.$page.'</option>'; 
+                } else {
+                    echo '<option value='.$page.'>'.$page.'</option>';
+                }
+            }
+        ?>   
+    </select>
+    <button id="nextpage">Next page</button><br><br>
     <!-- Gives the user two methods of selecting devices: a drop-down list or a search bar
     Choosing a PC from the list makes it appear in the table (allows multiple to be shown at once)
     Searching a PC's name (or part of it) will make it appear in the table -->

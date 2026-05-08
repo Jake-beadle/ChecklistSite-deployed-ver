@@ -113,6 +113,36 @@ $(document).ready(function(){
         window.location.replace(url)
     })
 
+    // Used for buttons that will show the previous/next page
+    $(document).on("click", "#prevpage", function(){
+        page = $(document).find('#pagechange').val()
+        if (!(page == 1)) {
+            sort = $(document).find('#datesort').val()
+            size = $(document).find('#pagesize').val()
+            page = parseInt(page) - 1
+            let url = new URL('http://localhost:81/main.php')
+            url.searchParams.set('sort',sort)
+            url.searchParams.set('page',page)
+            url.searchParams.set('pagesize',size)
+            window.location.replace(url)
+        }
+    })
+    $(document).on("click", "#nextpage", function(){
+        select = $(document).find('#pagechange')
+        page = $(document).find('#pagechange').val()
+        pages = $(document).find('.lastpage').val()
+        if (!(page == pages)) {
+            sort = $(document).find('#datesort').val()
+            size = $(document).find('#pagesize').val()
+            page = parseInt(page) + 1
+            let url = new URL('http://localhost:81/main.php')
+            url.searchParams.set('sort',sort)
+            url.searchParams.set('page',page)
+            url.searchParams.set('pagesize',size)
+            window.location.replace(url)
+        }
+    })
+
     $(document).on("input", "#deviceselect", function(){
         // Sets the input to lowercase to make it ignore capitals, making it easier to search (name of pc is also set to lowercase later for this reason)
         let search = $(document).find('#deviceselect').val().toLowerCase()
