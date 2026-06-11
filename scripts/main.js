@@ -26,6 +26,27 @@ $(document).ready(function(){
                     setTimeout(function() { location.reload(true); }, 2000);
             })
         })
+        $("#deviceselect").on("input",function(){
+            // Sets the input to lowercase to make it ignore capitals, making iit easier to search (name of pc is also set to lowercase later for this reason)
+            let search = $(document).find('#deviceselect').val().toLowerCase()
+            if (search.length >= 3) {
+                // Gets the rows inside the table body and saves it as an array (so they can be iterated through)
+                let rows = $(document).find('tbody tr')
+                for (let i = 0; i < rows.length; i++) {
+                    // Finds the current row and gets the name of the PC on that row
+                    var row = rows[i]
+                    name = $(row).find('#PCname').html()
+                    name = name.replace('Name of PC: ','').toLowerCase()
+                    // If the searched text is part of the name, the row for that PC will be shown to the user
+                    if (name.includes(search)) {
+                        $(row).attr("hidden",false)
+                    // If not, it gets hidden (so that it only shows the PCs that the user wants to see)
+                    } else {
+                        $(row).attr("hidden",true)
+                    }
+                }
+            }
+        })
     })
     
     // rowToEdit is used in multiple of these functions, but cannot be declared globablly as $(this) wouldn't work
@@ -33,12 +54,14 @@ $(document).ready(function(){
     // This function unhides the necessary areas that are used to edit an entry
     $(document).on("click", "#editEntry", function(){
         let rowToEdit = $(this).closest("tr");
+        $(rowToEdit).find("#PCImages").attr("hidden", true)
         $(rowToEdit).find("#PCname").attr("hidden", true)
         $(rowToEdit).find("#Status").attr("hidden", true)
         $(rowToEdit).find("#PlantSub").attr("hidden", true)
         $(rowToEdit).find("#editEntry").attr("hidden", true)
         $(rowToEdit).find("#deleteEntry").attr("hidden", true)
         $(rowToEdit).find(".Default").attr("hidden", true)
+        $(rowToEdit).find("#PCImageUpload").attr("hidden", false)
         $(rowToEdit).find("#PCnameEditP").attr("hidden", false)
         $(rowToEdit).find("#StatusEditP").attr("hidden", false)
         $(rowToEdit).find("#PlantSubEditP").attr("hidden", false)
@@ -50,12 +73,14 @@ $(document).ready(function(){
     // This does the opposite of the above function, hiding the parts that would let the user edit the entry
     $(document).on("click", "#cancelEditEntry", function(){
         let rowToEdit = $(this).closest("tr");
+        $(rowToEdit).find("#PCImages").attr("hidden", false)
         $(rowToEdit).find("#PCname").attr("hidden", false)
         $(rowToEdit).find("#Status").attr("hidden", false)
         $(rowToEdit).find("#PlantSub").attr("hidden", false)
         $(rowToEdit).find("#editEntry").attr("hidden", false)
         $(rowToEdit).find("#deleteEntry").attr("hidden", false)
         $(rowToEdit).find(".Default").attr("hidden", false)
+        $(rowToEdit).find("#PCImageUpload").attr("hidden", true)
         $(rowToEdit).find("#PCnameEditP").attr("hidden", true)
         $(rowToEdit).find("#StatusEditP").attr("hidden", true)
         $(rowToEdit).find("#PlantSubEditP").attr("hidden", true)
@@ -132,6 +157,7 @@ $(document).ready(function(){
             window.location.replace(url)
         }
     })
+    
     $(document).on("click", "#nextpage", function(){
         select = $(document).find('#pagechange')
         page = $(document).find('#pagechange').val()
@@ -145,27 +171,5 @@ $(document).ready(function(){
             url.searchParams.set('page',page)
             url.searchParams.set('pagesize',size)
             window.location.replace(url)
-        }
-    })
-
-    $("#deviceselect").on("input",function(){
-        // Sets the input to lowercase to make it ignore capitals, making iit easier to search (name of pc is also set to lowercase later for this reason)
-        let search = $(document).find('#deviceselect').val().toLowerCase()
-        if (search.length >= 3) {
-            // Gets the rows inside the table body and saves it as an array (so they can be iterated through)
-            let rows = $(document).find('tbody tr')
-            for (let i = 0; i < rows.length; i++) {
-                // Finds the current row and gets the name of the PC on that row
-                var row = rows[i]
-                name = $(row).find('#PCname').html()
-                name = name.replace('Name of PC: ','').toLowerCase()
-                // If the searched text is part of the name, the row for that PC will be shown to the user
-                if (name.includes(search)) {
-                    $(row).attr("hidden",false)
-                // If not, it gets hidden (so that it only shows the PCs that the user wants to see)
-                } else {
-                    $(row).attr("hidden",true)
-                }
-            }
         }
     })

@@ -7,7 +7,7 @@ $(document).ready(function(){
                 var res = JSON.parse(response);
                 // If the details entered were valid, it will have set the session data, so the user should be redirected to the main page
                 if (res.status == "ok") {
-                    window.location.href = "http://bsvscu-utilp01.bsl.co.uk:9000/main.php"
+                    window.location.href = "/main.php"
                 // If the details weren't valid, it returns a message explaining what went wrong to the user
                 } else {
                     $("#result").html(res.msg)
