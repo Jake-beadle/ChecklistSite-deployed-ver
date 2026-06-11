@@ -136,7 +136,7 @@ $checkresult = mysqli_query($conn, $checkquery);
     <!-- Lets the user filter by the plant that the device is located at -->
     <label for="plantfilter">Filter by plant:</label>
     <select id="plantfilter" name="plantfilter">
-        <option value="disabled">Disabled</option>
+        <option value="disabled">Disabled (all plants)</option>
         <option value="scunthorpe">Scunthorpe</option>
         <option value="teesside">Teesside</option>
         <option value="skinningrove">Skinningrove</option>
