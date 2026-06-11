@@ -10,7 +10,7 @@ $(document).ready(function(){
         let selectsize = $(document).find(`#pagesize option[value=${currentsize}]`)
         // If the parameters can't be set for any reason (e.g. if the URL is changed manually), it gets set back to the default settings
         if (!($(selectsort).length)||!($(selectpage).length)||!($(selectsize).length)) {
-            window.location.replace("http://bsvscu-utilp01.bsl.co.uk:9000/login.php/main.php?sort=disabled&page=1&pagesize=5")
+            window.location.replace("http://bsvscu-utilp01.bsl.co.uk:9000/main.php?sort=disabled&page=1&pagesize=5")
         }
         $(selectsort).prop('selected',true)
         $(selectpage).prop('selected',true)
