@@ -72,6 +72,7 @@ $checkresult = mysqli_query($conn, $checkquery);
             <option value="scunthorpe">Scunthorpe</option>
             <option value="teesside">Teesside</option>
             <option value="skinningrove">Skinningrove</option>
+            <option value="immingham">Immingham</option>
         </select><br><br>
         <label for="sub">Sub-location:</label>
         <textarea type="textbox" id="sub" name="sub" placeholder="Enter sub-location" required></textarea><br><br>
