@@ -10,7 +10,7 @@ $(document).ready(function(){
         let selectsize = $(document).find(`#pagesize option[value=${currentsize}]`)
         // If the parameters can't be set for any reason (e.g. if the URL is changed manually), it gets set back to the default settings
         if (!($(selectsort).length)||!($(selectpage).length)||!($(selectsize).length)) {
-            window.location.replace("http://localhost:81/main.php?sort=disabled&page=1&pagesize=5")
+            window.location.replace("http://bsvscu-utilp01.bsl.co.uk:9000/login.php/main.php?sort=disabled&page=1&pagesize=5")
         }
         $(selectsort).prop('selected',true)
         $(selectpage).prop('selected',true)
@@ -155,7 +155,7 @@ $(document).ready(function(){
         sort = $(document).find('#datesort').val()
         page = $(document).find('#pagechange').val()
         size = $(document).find('#pagesize').val()
-        let url = new URL('http://localhost:81/main.php')
+        let url = new URL('http://bsvscu-utilp01.bsl.co.uk:9000/main.php')
         url.searchParams.set('sort',sort)
         url.searchParams.set('page',page)
         url.searchParams.set('pagesize',size)
@@ -169,7 +169,7 @@ $(document).ready(function(){
             sort = $(document).find('#datesort').val()
             size = $(document).find('#pagesize').val()
             page = parseInt(page) - 1
-            let url = new URL('http://localhost:81/main.php')
+            let url = new URL('http://bsvscu-utilp01.bsl.co.uk:9000/main.php')
             url.searchParams.set('sort',sort)
             url.searchParams.set('page',page)
             url.searchParams.set('pagesize',size)
@@ -184,7 +184,7 @@ $(document).ready(function(){
             sort = $(document).find('#datesort').val()
             size = $(document).find('#pagesize').val()
             page = parseInt(page) + 1
-            let url = new URL('http://localhost:81/main.php')
+            let url = new URL('http://bsvscu-utilp01.bsl.co.uk:9000/main.php')
             url.searchParams.set('sort',sort)
             url.searchParams.set('page',page)
             url.searchParams.set('pagesize',size)
