@@ -176,6 +176,7 @@ $checkresult = mysqli_query($conn, $checkquery);
                                 <option value='scunthorpe'>Scunthorpe</option>
                                 <option value='teesside'>Teesside</option>
                                 <option value='skinningrove'>Skinningrove</option>
+                                <option value='immingham'>Immingham</option>
                             </select>
                             , sub-location: <textarea id='SublocationEdit'>".$inforow['Sublocation']."</textarea></p>
                             <p id='Dateofcheck'>Date of last check/change: ".$inforow['Dateofcheck']."</p>
