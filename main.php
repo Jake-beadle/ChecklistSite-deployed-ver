@@ -132,7 +132,16 @@ $checkresult = mysqli_query($conn, $checkquery);
             echo "<option value=".$deviceoption["PCname"].">".$deviceoption["PCname"]."</option>";
         }
         ?>
-    </datalist>
+    </datalist><br>
+    <!-- Lets the user filter by the plant that the device is located at -->
+    <label for="plantfilter">Filter by plant:</label>
+    <select id="plantfilter" name="plantfilter">
+        <option value="disabled">Disabled</option>
+        <option value="scunthorpe">Scunthorpe</option>
+        <option value="teesside">Teesside</option>
+        <option value="skinningrove">Skinningrove</option>
+        <option value="immingham">Immingham</option>
+    </select><br><br>
     <!-- Table that contains checklists and information for each PC.
     Initially shows all information for that page, but can change what
     entries are shown by using the search/dropdown above -->
@@ -171,7 +180,7 @@ $checkresult = mysqli_query($conn, $checkquery);
                                 <option value='passed'>Passed</option>
                                 <option value='failed'>Failed</option>
                             </select></p>
-                            <p id='PlantSub'>Plant: ".$inforow['Plant'].", sub-location: ".$inforow['Sublocation']."</p>
+                            <p id='PlantSub'>Plant: <span id='Plant'>".$inforow['Plant']."</span>, sub-location: ".$inforow['Sublocation']."</p>
                             <p id='PlantSubEditP' hidden>Plant: 
                             <select id='PlantEdit' name='PlantEdit'>
                                 <option value='scunthorpe'>Scunthorpe</option>

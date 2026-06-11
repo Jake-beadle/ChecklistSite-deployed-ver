@@ -10,7 +10,7 @@ $(document).ready(function(){
         let selectsize = $(document).find(`#pagesize option[value=${currentsize}]`)
         // If the parameters can't be set for any reason (e.g. if the URL is changed manually), it gets set back to the default settings
         if (!($(selectsort).length)||!($(selectpage).length)||!($(selectsize).length)) {
-            window.location.replace("http://bsvscu-utilp01.bsl.co.uk:9000/main.php?sort=disabled&page=1&pagesize=5")
+            window.location.replace("http://localhost:81/main.php?sort=disabled&page=1&pagesize=5")
         }
         $(selectsort).prop('selected',true)
         $(selectpage).prop('selected',true)
@@ -27,23 +27,42 @@ $(document).ready(function(){
             })
         })
         $("#deviceselect").on("input",function(){
-            // Sets the input to lowercase to make it ignore capitals, making iit easier to search (name of pc is also set to lowercase later for this reason)
+            // Sets the input to lowercase to make it ignore capitals, making it easier to search (name of pc is also set to lowercase later for this reason)
             let search = $(document).find('#deviceselect').val().toLowerCase()
-            if (search.length >= 3) {
-                // Gets the rows inside the table body and saves it as an array (so they can be iterated through)
-                let rows = $(document).find('tbody tr')
-                for (let i = 0; i < rows.length; i++) {
-                    // Finds the current row and gets the name of the PC on that row
-                    var row = rows[i]
-                    name = $(row).find('#PCname').html()
-                    name = name.replace('Name of PC: ','').toLowerCase()
-                    // If the searched text is part of the name, the row for that PC will be shown to the user
-                    if (name.includes(search)) {
-                        $(row).attr("hidden",false)
-                    // If not, it gets hidden (so that it only shows the PCs that the user wants to see)
-                    } else {
-                        $(row).attr("hidden",true)
-                    }
+            // Then gets the chosen filter (including if it is disabled)
+            let filter = $(document).find('#plantfilter').val()
+            // Gets the rows inside the table body and saves it as an array (so they can be iterated through)
+            let rows = $(document).find('tbody tr')
+            for (let i = 0; i < rows.length; i++) {
+                // Finds the current row and gets the name of the PC on that row
+                var row = rows[i]
+                name = $(row).find('#PCname').html()
+                name = name.replace('Name of PC: ','').toLowerCase()
+                plant = $(row).find('#Plant').html().toLowerCase()
+                // If the searched text is part of the name (and the plant is correct if the filter is active), the row for that PC will be shown to the user
+                if (name.includes(search) && ((filter == "disabled") || (filter == plant))) {
+                    $(row).attr("hidden",false)
+                // If not, it gets hidden (so that it only shows the PCs that the user wants to see)
+                } else {
+                    $(row).attr("hidden",true)
+                }
+            }
+        })
+        // Same block of code as above but runs after changing the filter rather than changing the search.
+        // Moving this into a function breaks it for some reason so having to add the same code twice
+        $("#plantfilter").on("change",function(){
+            let search = $(document).find('#deviceselect').val().toLowerCase()
+            let filter = $(document).find('#plantfilter').val()
+            let rows = $(document).find('tbody tr')
+            for (let i = 0; i < rows.length; i++) {
+                var row = rows[i]
+                name = $(row).find('#PCname').html()
+                name = name.replace('Name of PC: ','').toLowerCase()
+                plant = $(row).find('#Plant').html().toLowerCase()
+                if (name.includes(search) && ((filter == "disabled") || (filter == plant))) {
+                    $(row).attr("hidden",false)
+                } else {
+                    $(row).attr("hidden",true)
                 }
             }
         })
@@ -136,7 +155,7 @@ $(document).ready(function(){
         sort = $(document).find('#datesort').val()
         page = $(document).find('#pagechange').val()
         size = $(document).find('#pagesize').val()
-        let url = new URL('http://bsvscu-utilp01.bsl.co.uk:9000/main.php')
+        let url = new URL('http://localhost:81/main.php')
         url.searchParams.set('sort',sort)
         url.searchParams.set('page',page)
         url.searchParams.set('pagesize',size)
@@ -150,14 +169,13 @@ $(document).ready(function(){
             sort = $(document).find('#datesort').val()
             size = $(document).find('#pagesize').val()
             page = parseInt(page) - 1
-            let url = new URL('http://bsvscu-utilp01.bsl.co.uk:9000/main.php')
+            let url = new URL('http://localhost:81/main.php')
             url.searchParams.set('sort',sort)
             url.searchParams.set('page',page)
             url.searchParams.set('pagesize',size)
             window.location.replace(url)
         }
     })
-    
     $(document).on("click", "#nextpage", function(){
         select = $(document).find('#pagechange')
         page = $(document).find('#pagechange').val()
@@ -166,7 +184,7 @@ $(document).ready(function(){
             sort = $(document).find('#datesort').val()
             size = $(document).find('#pagesize').val()
             page = parseInt(page) + 1
-            let url = new URL('http://bsvscu-utilp01.bsl.co.uk:9000/main.php')
+            let url = new URL('http://localhost:81/main.php')
             url.searchParams.set('sort',sort)
             url.searchParams.set('page',page)
             url.searchParams.set('pagesize',size)
