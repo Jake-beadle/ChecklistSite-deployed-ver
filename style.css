@@ -97,7 +97,7 @@ option::checkmark {
     accent-color: #ec7f22;
 }
 
-#deviceselect {
+#deviceselect, #subfilter {
     font-size: 20px;
     margin-bottom: 20px;
 }
